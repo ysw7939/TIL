@@ -7,29 +7,31 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        boolean[][] booleans = new boolean[100][100];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int E = Integer.parseInt(st.nextToken());
+        int S = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
+        int a=0;
+        int b=0;
+        int c=0;
 
-        int count = 0;
-        int num = Integer.parseInt(br.readLine());
-        for (int i = 0; i < num; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            for (int j = a - 1; j < a + 9; j++) {
-                for (int k = b - 1; k < b + 9; k++) {
-                    booleans[j][k] = true;
-                }
+        int count =0;
+        while (!(a == E && b == S && c == M)) {
+            if (a == 15) {
+                a = 0;
             }
-        }
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                if (booleans[i][j]) {
-                    count++;
-                }
+            if (b == 28) {
+                b =0;
             }
+            if (c == 19) {
+                c =0;
+            }
+            a++;
+            c++;
+            b++;
+            count++;
         }
         System.out.println(count);
-
     }
 }
