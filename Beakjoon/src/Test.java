@@ -1,7 +1,8 @@
 public class Test {
     public static void main(String[] args) {
-        String[] strings= new String[1];
+        String s = "Z";
 
-        System.out.println(strings[2]);
+        int i = s.charAt(0) - 'A';
+        System.out.println(i);
     }
 }

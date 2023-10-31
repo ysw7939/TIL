@@ -1,3 +1,5 @@
+package Week4;
+
 import java.io.*;
 
 public class Week4_세로읽기 {
