@@ -1,10 +1,11 @@
+package Week6;
+
 import java.io.*;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Test {
+public class 덱 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));

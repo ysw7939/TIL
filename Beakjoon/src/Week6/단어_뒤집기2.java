@@ -1,8 +1,9 @@
+package Week6;
+
 import java.io.*;
-import java.util.*;
+import java.util.Stack;
 
-public class Main {
-
+public class 단어_뒤집기2 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -41,7 +42,5 @@ public class Main {
         bw.flush();
         bw.close();
     }
+
 }
-
-
-
