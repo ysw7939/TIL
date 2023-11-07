@@ -1,7 +1,11 @@
-import java.io.*;
-import java.util.*;
+package Week6;
 
-public class Main {
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+public class 후위_표기식 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -47,6 +51,3 @@ public class Main {
 
     }
 }
-
-
-
