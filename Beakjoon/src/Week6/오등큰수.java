@@ -1,8 +1,10 @@
+package Week6;
+
 import java.io.*;
-import java.util.*;
+import java.util.Stack;
+import java.util.StringTokenizer;
 
-public class Main {
-
+public class 오등큰수 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -27,7 +29,7 @@ public class Main {
                 } else {
                     A[stack.pop()] = A[i];
                     while ((!stack.empty()) &&  count[A[stack.peek()]] <count[A[i]]) {
-                       A[stack.pop()] = A[i];
+                        A[stack.pop()] = A[i];
                     }
                     stack.push(i);
                 }
@@ -44,6 +46,3 @@ public class Main {
         bw.close();
     }
 }
-
-
-
