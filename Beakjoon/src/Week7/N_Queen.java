@@ -1,9 +1,8 @@
+package Week7;
+
 import java.io.*;
-import java.util.*;
 
-
-
-public class Main {
+public class N_Queen {
     static int[] chess_bord;
     static int count=0;
     static int N;
@@ -48,9 +47,4 @@ public class Main {
         }
         return true;
     }
-
-
 }
-
-
-
