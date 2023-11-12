@@ -1,9 +1,8 @@
+package Week7;
+
 import java.io.*;
-import java.util.*;
 
-
-
-public class Main {
+public class 하나1로_만들기 {
     static int result =123456789;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,14 +22,11 @@ public class Main {
             return;
         }
         if (x % 3 == 0) {
-             dp(x/3 , depth+1);
+            dp(x/3 , depth+1);
         }
         if (x %2 ==0) {
-             dp(x/2, depth+1);
+            dp(x/2, depth+1);
         }
-         dp(x-1, depth+1);
+        dp(x-1, depth+1);
     }
 }
-
-
-
