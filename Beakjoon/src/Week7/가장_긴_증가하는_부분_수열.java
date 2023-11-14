@@ -1,11 +1,9 @@
+package Week7;
+
 import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 
-
-
-public class Main {
-
-
+public class 가장_긴_증가하는_부분_수열 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -35,6 +33,3 @@ public class Main {
 
     }
 }
-
-
-
