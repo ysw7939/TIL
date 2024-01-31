@@ -1,11 +1,14 @@
 import config from "@colyseus/tools";
 import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
-
+import { ChatRoom } from "./rooms/chatting_room";
+import path from 'path';
+import serveIndex from 'serve-index';
 /**
  * Import your Room files
  */
 import { MyRoom } from "./rooms/MyRoom";
+import express from "express";
 
 export default config({
 
@@ -14,7 +17,9 @@ export default config({
          * Define your room handlers:
          */
         gameServer.define('my_room', MyRoom);
-
+        
+        gameServer.define("chat", ChatRoom)
+            .enableRealtimeListing();
     },
 
     initializeExpress: (app) => {
@@ -31,7 +36,8 @@ export default config({
          * (It is not recommended to expose this route in a production environment)
          */
         if (process.env.NODE_ENV !== "production") {
-            app.use("/", playground);
+            app.use('/', serveIndex(path.join(__dirname, "static"), {'icons': true}))
+            app.use('/', express.static(path.join(__dirname, "static")));
         }
 
         /**
