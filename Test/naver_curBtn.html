@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>네이버지도 스틱코드</title>
+    <style>
+        .spr_trff {
+            overflow: hidden;
+            display: inline-block;
+            color: transparent !important;
+            vertical-align: top;
+            background: url(https://ssl.pstatic.net/static/maps/m/spr_trff_v6.png) 0 0;
+            background-size: 200px 200px;
+            -webkit-background-size: 200px 200px;
+        }
+
+        .spr_ico_mylct {
+            width: 20px;
+            height: 20px;
+            margin: 7px 0 0 0;
+            background-position: -153px -31px;
+            pointer-events: auto;
+        }
+
+        .btn_mylct {
+            z-index: 100;
+            overflow: hidden;
+            display: inline-block;
+            position: absolute;
+            top: 7px;
+            left: 5px;
+            width: 34px;
+            height: 34px;
+            border: 1px solid rgba(58, 70, 88, .45);
+            border-radius: 2px;
+            background: #fcfcfd;
+            text-align: center;
+            -webkit-background-clip: padding;
+            background-clip: padding-box;
+        }
+    </style>
+    <script type="text/javascript"
+        src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nwb45gwhxz"></script>
+</head>
+
+<body>
+    <div id="map" style="width:100%; height:800px;"></div>
+
+    <script type="text/javascript">
+
+        // 현재 위치 위도, 경도 좌표 객체를 담을 변수
+        var curtLoca = "";
+
+        // 서울 시청 위/경도 좌표 객체
+        var sCityHallLoca = new naver.maps.LatLng(37.5666805, 126.9784147);
+
+        // Map 초기화
+        var map = new naver.maps.Map('map', {
+            center: sCityHallLoca,    // X, Y 값 설정
+            scaleControl: false,      // 우측 하단 scale 표시
+            mapDataControl: false,    // 좌측 하단 @ NAVER Corp 표시
+            zoom: 17                  // 지도 줌 레벨
+        });
+
+
+        // getCurrentPosition 성공 콜백 함수
+        var onSuccessGeolocation = function (position) {
+            // 현재위치
+            curtLoca = new naver.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            console.log("현재 고정 위치: 위도 " + position.coords.latitude + ", 경도 " + position.coords.longitude);
+        }
+
+        // getCurrentPosition 에러 콜백 함수
+        var onErrorGeolocation = function () {
+
+            var agent = navigator.userAgent.toLowerCase(), name = navigator.appName;
+
+            if (name === 'Microsoft Internet Explorer' || agent.indexOf('trident') > -1 || agent.indexOf('edge/') > -1) {
+                alert("지원하지 않는 브라우져입니다.");
+            }
+            else {
+                console.log("현재 위치를 가져오는데 에러가 발생하였습니다.");
+            }
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+
+
+        // 현재 위치로 이동 이미지
+        var curtBtn = '<a href="#" class="btn_mylct"><span class="spr_trff spr_ico_mylct">현제 위치</span></a>';
+
+        // Map 사용자 정의 컨트롤 이벤트 추가 (현재위치로 이동 버튼을 추가)
+        naver.maps.Event.once(map, 'init', function () {
+            /*
+            현재 위치로 이동 img tag 변수를 CustomControl에 설정
+            표시될 위치는 맵의 우측 상단
+            */
+            var customControl = new naver.maps.CustomControl(curtBtn, {
+                position: naver.maps.Position.TOP_LEFT
+            });
+
+            // CustomControl를 Map에 설정
+            customControl.setMap(map);
+
+            // 클릭 이벤트 리스너 설정
+            naver.maps.Event.addDOMListener(customControl.getElement(), 'click', function () {
+                if (curtLoca) {
+                    // 현재 위치에 마커 표시
+                    new naver.maps.Marker({
+                        position: curtLoca,
+                        map: map,
+                    });
+                    // 얻은 좌표를 지도의 중심으로 설정
+                    map.setCenter(curtLoca);
+
+                    // 지도의 줌 레벨을 변경
+                    map.setZoom(17);
+                }
+
+                else {
+                    alert("잠시 후 다시 시도해 주세요");
+                }
+            });
+
+        });
+
+
+
+
+        var watchId;
+
+        function startTracking() {
+            if (navigator.geolocation) {
+                // 위치 추적 권한 요청
+                navigator.permissions.query({ name: 'geolocation' }).then(function (permissionStatus) {
+                    if (permissionStatus.state === 'granted') {
+                        // 위치 추적 시작
+                        watchId = navigator.geolocation.watchPosition(function (position) {
+                            var latitude = position.coords.latitude;
+                            var longitude = position.coords.longitude;
+                            console.log("현재 위치: 위도 " + latitude + ", 경도 " + longitude);
+                        }, function (error) {
+                            console.error("오류 발생: " + error.message);
+                        });
+                    } else {
+                        console.error("위치 추적 권한이 거부되었습니다.");
+                    }
+                });
+            } else {
+                console.error("Geolocation을 지원하지 않는 브라우저입니다.");
+            }
+        }
+
+        function stopTracking() {
+            if (navigator.geolocation && watchId) {
+                // 위치 추적 중지
+                navigator.geolocation.clearWatch(watchId);
+                console.log("위치 추적이 중지되었습니다.");
+            }
+        }
+
+        // 위치 추적 시작
+        startTracking();
+    </script>
+
+</body>
+
+</html>
