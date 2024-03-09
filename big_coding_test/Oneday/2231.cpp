@@ -51,10 +51,5 @@ int main()
         }
         i++;
     }
-
-    // for (int j = 0; j < 200; j++)
-    // {
-    //     cout << j << ":: " << arr[j] << "\n";
-    // }
     cout << arr[N] << "\n";
 }
