@@ -8,11 +8,11 @@ int main()
     cout.tie(NULL);
 
     int N, M;
-    int sum = 0;
+    long long sum = 0;
     cin >> N >> M;
 
     long long arr[1004];
-    fill(arr, arr[])
+    fill(&arr[0], &arr[1004], 0);
     for (int i = 0; i < N; i++)
     {
         int temp;
@@ -21,12 +21,11 @@ int main()
         arr[sum % M]++;
     }
 
-    int cnt;            
+    long long cnt = 0;
     for (int i = 0; i <= M; i++)
     {
-        // cnt += arr[i] * (arr[i] - 1) / 2;
-        cout << arr[i] << '\n';
+        cnt += arr[i] * (arr[i] - 1) / 2;
     }
 
-    // cout << arr[0] + cnt << '\n';
+    cout << arr[0] + cnt << '\n';
 }
