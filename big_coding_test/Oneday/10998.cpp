@@ -7,7 +7,7 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int a, b;
-    cin >> a >> b;
-    cout << a * b << '\n';
+    long long a, b, c;
+    cin >> a >> b >> c;
+    cout << a + b + c << '\n';
 }
